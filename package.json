@@ -1,0 +1,21 @@
+{
+  "name": "lifecycle-demo",
+  "packageManager": "yarn@4.4.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "build": "yarn workspaces foreach -Apv --verbose --topological-dev run build",
+    "start": "yarn workspaces foreach -Apv  --verbose --topological-dev run start",
+    "test": "yarn workspaces foreach -Apv --topological-dev run test",
+    "lint": "yarn workspaces foreach -Apv --topological-dev run lint",
+    "lint:fix": "yarn workspaces foreach -Apv --topological-dev run lint:fix",
+    "update": "ncu -u --deep --target minor",
+    "doAll": "yarn update && yarn dedupe --strategy highest && yarn && yarn dedupe --strategy highest && yarn build && yarn lint"
+  },
+  "devDependencies": {
+    "@zdrbm/eslint-config-zdr": "1.3.0",
+    "npm-check-updates": "^17.1.0"
+  }
+}

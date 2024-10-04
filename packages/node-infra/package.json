@@ -1,0 +1,50 @@
+{
+  "name": "node-infra",
+  "version": "1.0.0",
+  "author": {
+    "name": "talbenmoshe",
+    "email": "tal.benm@gmail.com"
+  },
+  "license": "ISC",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "sideEffects": false,
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/cjs",
+    "dist/esm",
+    "dist/types"
+  ],
+  "scripts": {
+    "start": ":",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "build:cjs": "node tools/cleanup cjs && tsc -p tsconfig.cjs.json",
+    "build:esm": "node tools/cleanup esm && tsc -p tsconfig.esm.json",
+    "build:umd": "node tools/cleanup umd && webpack --config webpack.config.js",
+    "build:types": "node tools/cleanup types && tsc -p tsconfig.types.json",
+    "test": "jest --no-cache --runInBand",
+    "test:cov": "jest --coverage --no-cache --runInBand",
+    "lint": "npx eslint . --ext ts,js",
+    "lint:fix": "npx eslint . --fix --ext ts,js"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "yarn lint"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.6",
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "url-join": "4.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2",
+    "@types/jest": "^29.5.13",
+    "@types/node": "^16.18.97",
+    "@types/url-join": "^4.0.3",
+    "@zdrbm/eslint-config-zdr": "1.3.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "~4.9.5"
+  }
+}

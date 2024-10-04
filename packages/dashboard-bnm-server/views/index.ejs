@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="https://analytics.placer.ai/favicon/favicon-32x32.png?v=2" />
+  <link rel="stylesheet" href="<%= await staticsProvider.getArtifactFile('com.placer.dashboard-bnm', 'index.css') %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    window.user = {
+      name: 'Tal',
+      email: 'tal.bm@placer.ai',
+      image: 'https://lh3.googleusercontent.com/ogw/AF2bZyh3EryWJPXdBn35HzW_IRO7nnSEOTkL8gZr4Uro2bbdFg=s32-c-mo'
+    }
+  </script>
+  <script crossorigin type="module" src="<%= await staticsProvider.getArtifactFile('com.placer.dashboard-bnm', 'index.js') %>"></script>
+
+</body>
+
+</html>

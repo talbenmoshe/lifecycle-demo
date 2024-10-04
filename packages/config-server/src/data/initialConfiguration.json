@@ -1,0 +1,6 @@
+{
+  "com.placer.dashboard-bnm": {
+    "baseStaticsUrl": "//talbenmoshe-s3.s3.eu-west-1.amazonaws.com/services/",
+    "staticsVersion": "1.0.0"
+  }
+}
