@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const Artifact = z.object({
   id: z.string().readonly(),
-  ga_version: z.string().optional(),
-  rc_versions: z.string().array().optional(),
+  staticsVersion: z.string().optional(),
+  rcVersions: z.string().array().optional().readonly(),
 });
 
 export const GetArtifactRequest = z.object({
-  artifact_id: z.string().optional(),
+  artifactId: z.string().optional(),
 });
 
 export const GetArtifactResponse = z.object({
@@ -15,8 +15,8 @@ export const GetArtifactResponse = z.object({
 });
 
 export const UpdateArtifactRequest = z.object({
-  artifact_id: z.string().optional(),
-  ga_version: z.string().optional(),
+  artifactId: z.string().optional(),
+  newStaticsVersion: z.string().optional(),
 });
 
 export const UpdateArtifactResponse = z.object({
