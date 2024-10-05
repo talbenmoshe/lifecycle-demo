@@ -22,7 +22,7 @@ export const startServer = async (): Promise<void> => {
   await server.register(sensible);
 
   await server.register(cors, {
-    origin: "http://localhost:5173",
+    origin: env.LIFECYCLE_CLIENT_URL,
     credentials: true,
   });
 
