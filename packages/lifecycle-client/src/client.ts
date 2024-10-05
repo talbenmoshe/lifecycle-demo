@@ -1,13 +1,19 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import type { LifecycleServerRouter } from "lifecycle-server/src/index";
 
-const DEV_SERVER_PORT = 6000;
+const DEV_SERVER_PORT = 4000;
 const ROUTER_PREFIX = "/trpc";
 
 const eventsServiceClient = createTRPCProxyClient<LifecycleServerRouter>({
   links: [
     httpBatchLink({
       url: `http://localhost:${DEV_SERVER_PORT}${ROUTER_PREFIX}`,
+      fetch(url, options) {
+        return fetch(url, {
+          ...options,
+          credentials: "include", // This includes cookies in the request
+        });
+      },
     }),
   ],
 });
@@ -39,16 +45,19 @@ async function populateArtifactSelect() {
   const artifactSelect = document.getElementById(
     "artifact-select"
   ) as HTMLSelectElement;
-  const { artifacts } = await eventsServiceClient.artifacts.list.query();
+  try {
+    const { artifacts } = await eventsServiceClient.artifacts.list.query();
+    artifacts.forEach((artifact) => {
+      const option = document.createElement("option");
+      option.value = artifact.id;
+      option.textContent = artifact.id;
+      artifactSelect.appendChild(option);
+    });
 
-  artifacts.forEach((artifact) => {
-    const option = document.createElement("option");
-    option.value = artifact.id;
-    option.textContent = artifact.id;
-    artifactSelect.appendChild(option);
-  });
-
-  artifactSelect.addEventListener("change", handleArtifactChange);
+    artifactSelect.addEventListener("change", handleArtifactChange);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function handleArtifactChange(event: Event) {

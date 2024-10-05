@@ -21,7 +21,10 @@ export const startServer = async (): Promise<void> => {
 
   await server.register(sensible); // adds sensible defaults
 
-  await server.register(cors); // adds CORS headers
+  await server.register(cors, {
+    origin: "http://localhost:5173", // Specify your frontend origin
+    credentials: true, // Allow credentials (cookies, etc.)
+  });
 
   await server.register(helmet); // adds security headers
 

@@ -5,8 +5,6 @@
   "main": "server.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "test": "npx nyc --reporter=html mocha --require tsx '**/*.test.ts'",
-    "test:coverage:open": "npx nyc --reporter=html mocha --require tsx '**/*.test.ts' && open coverage/index.html",
     "lint": "eslint --max-warnings=0",
     "lint:fix": "eslint --max-warnings=0 --cache --fix",
     "start": "node dist/index.js",
@@ -30,12 +28,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@types/chai": "^5.0.0",
-    "@types/mocha": "^10.0.8",
-    "chai": "^5.1.1",
     "concurrently": "6.5.1",
-    "mocha": "^10.7.3",
     "tsx": "^4.19.1",
     "typescript": "5.6.2"
   }
