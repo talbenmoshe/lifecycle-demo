@@ -19,14 +19,14 @@ export const startServer = async (): Promise<void> => {
     trpcOptions: { router: createRouter(), createContext },
   });
 
-  await server.register(sensible); // adds sensible defaults
+  await server.register(sensible);
 
   await server.register(cors, {
-    origin: "http://localhost:5173", // Specify your frontend origin
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: "http://localhost:5173",
+    credentials: true,
   });
 
-  await server.register(helmet); // adds security headers
+  await server.register(helmet);
 
   try {
     await server.listen({ port: env.PORT });
