@@ -1,0 +1,41 @@
+{
+  "name": "lifecycle-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "test": "npx nyc --reporter=html mocha --require tsx '**/*.test.ts'",
+    "test:coverage:open": "npx nyc --reporter=html mocha --require tsx '**/*.test.ts' && open coverage/index.html",
+    "lint": "eslint --max-warnings=0",
+    "lint:fix": "eslint --max-warnings=0 --cache --fix",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/helmet": "12.0.1",
+    "@fastify/sensible": "^6.0.1",
+    "@trpc/client": "^10.45.2",
+    "@trpc/server": "^10.45.2",
+    "config-server": "workspace:*",
+    "fastify": "^5.0.0",
+    "node-infra": "workspace:*",
+    "pino-pretty": "^11.2.2",
+    "reflect-metadata": "^0.2.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@types/chai": "^5.0.0",
+    "@types/mocha": "^10.0.8",
+    "chai": "^5.1.1",
+    "concurrently": "6.5.1",
+    "mocha": "^10.7.3",
+    "tsx": "^4.19.1",
+    "typescript": "5.6.2"
+  }
+}
