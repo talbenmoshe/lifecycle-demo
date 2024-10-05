@@ -62,7 +62,7 @@ async function populateArtifactSelect() {
     const { artifacts } = await eventsServiceClient.artifacts.list.query();
     console.log("Received artifacts:", artifacts);
 
-    artifactSelect.innerHTML = ""; // Clear existing options
+    artifactSelect.innerHTML = "";
     artifacts.forEach((artifact) => {
       const option = document.createElement("option");
       option.value = artifact.id;
@@ -72,7 +72,6 @@ async function populateArtifactSelect() {
 
     artifactSelect.addEventListener("change", handleArtifactChange);
 
-    // Select the first artifact by default and trigger change event
     if (artifacts.length > 0) {
       artifactSelect.value = artifacts[0].id;
       artifactSelect.dispatchEvent(new Event("change"));
@@ -105,7 +104,7 @@ function populateVersionSelect(versions: string[]) {
   const versionSelect = document.getElementById(
     "version-select"
   ) as HTMLSelectElement;
-  versionSelect.innerHTML = ""; // Clear existing options
+  versionSelect.innerHTML = "";
 
   versions.forEach((version) => {
     const option = document.createElement("option");
@@ -114,7 +113,6 @@ function populateVersionSelect(versions: string[]) {
     versionSelect.appendChild(option);
   });
 
-  // Set the current version as selected
   if (currentStaticVersion) {
     versionSelect.value = currentStaticVersion;
   }
