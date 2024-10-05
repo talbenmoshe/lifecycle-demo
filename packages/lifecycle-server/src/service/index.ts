@@ -4,7 +4,7 @@ import { router } from "./utils";
 export function createRouter() {
   return router({
     health: initHealthRouter(),
-    report: initArtifactsRouter(),
+    artifacts: initArtifactsRouter(),
   });
 }
 

@@ -2,12 +2,14 @@ import { findOneArtifact } from "../../../mock-data/utils";
 import {
   GetArtifactRequest,
   GetArtifactResponse,
+  ListArtifactsResponse,
   UpdateArtifactRequest,
   UpdateArtifactResponse,
 } from "../../../api/artifacts.api";
 import { publicProcedure, router } from "../../utils";
 import { TRPCError } from "@trpc/server";
 import { createConfigurationClient } from "../../../configuration-client";
+import { mockArtifacts } from "../../../mock-data";
 
 export function initArtifactsRouter() {
   return router({
@@ -72,5 +74,10 @@ export function initArtifactsRouter() {
           artifact: { ...artifact, staticsVersion: newStaticsVersion },
         };
       }),
+    list: publicProcedure.output(ListArtifactsResponse).query(() => {
+      return {
+        artifacts: Object.values(mockArtifacts),
+      };
+    }),
   });
 }

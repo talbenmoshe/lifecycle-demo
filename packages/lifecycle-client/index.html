@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events Service Client Playground</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <label for="artifact-select">Artifact ID: </label>
+        <span id="current-artifact-id"></span>
+        <select id="artifact-select"></select>
+
+        <br /><br />
+
+        <label for="version-select">Current Static Version: </label>
+        <span id="current-static-version"></span>
+        <select id="version-select"></select>
+
+        <br /><br />
+
+        <button id="update-button">Update Version</button>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

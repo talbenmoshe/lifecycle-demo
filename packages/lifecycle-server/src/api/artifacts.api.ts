@@ -22,3 +22,7 @@ export const UpdateArtifactRequest = z.object({
 export const UpdateArtifactResponse = z.object({
   artifact: Artifact,
 });
+
+export const ListArtifactsResponse = z.object({
+  artifacts: z.array(Artifact),
+});
