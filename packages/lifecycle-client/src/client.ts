@@ -20,6 +20,7 @@ const eventsServiceClient = createTRPCProxyClient<LifecycleServerRouter>({
 
 let currentArtifactId: string | null = null;
 let currentStaticVersion: string | null = null;
+let previousStaticVersion: string | null = null;
 
 async function getArtifactData(artifactId: string) {
   try {
@@ -90,6 +91,7 @@ async function handleArtifactChange(event: Event) {
     try {
       const artifact = await getArtifactData(currentArtifactId);
       if (artifact) {
+        previousStaticVersion = currentStaticVersion;
         currentStaticVersion = artifact.staticsVersion || "None";
         updateLabels();
         populateVersionSelect(artifact.rcVersions || []);
@@ -135,6 +137,7 @@ async function handleUpdateClick() {
   const newVersion = versionSelect.value;
 
   if (currentArtifactId && newVersion) {
+    previousStaticVersion = currentStaticVersion;
     const updatedArtifact = await updateArtifactData(
       currentArtifactId,
       newVersion
@@ -147,11 +150,32 @@ async function handleUpdateClick() {
   }
 }
 
+async function handleRollbackClick() {
+  if (currentArtifactId && previousStaticVersion) {
+    const updatedArtifact = await updateArtifactData(
+      currentArtifactId,
+      previousStaticVersion
+    );
+    if (updatedArtifact) {
+      currentStaticVersion = updatedArtifact.staticsVersion || "None";
+      updateLabels();
+      populateVersionSelect(updatedArtifact.rcVersions || []);
+    }
+  } else {
+    alert("No previous version available for rollback.");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   populateArtifactSelect();
 
   const updateButton = document.getElementById("update-button");
   if (updateButton) {
     updateButton.addEventListener("click", handleUpdateClick);
+  }
+
+  const rollbackButton = document.getElementById("rollback-button");
+  if (rollbackButton) {
+    rollbackButton.addEventListener("click", handleRollbackClick);
   }
 });
