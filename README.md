@@ -17,3 +17,5 @@ To override staticsUrl add this to the end of the url: `?staticsOverrides=com.pl
 ```
 yarn dev
 ```
+
+- Then open [http://localhost:5173](http://localhost:5173)
